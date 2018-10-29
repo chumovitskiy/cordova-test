@@ -1,8 +1,8 @@
 # My Test Cordova build for web,android and ios
 ## Build ios
 cordova platform add ios
-npm run build && cordova build ios
-cordova run --emulator --nobuild ios --buildFlag='-UseModernBuildSystem=0'
+npm run build && cordova build ios --buildFlag='-UseModernBuildSystem=0'
+cordova run --emulator --nobuild ios
 ## Build android
 cordova platform add android
 npm run build && cordova build android
