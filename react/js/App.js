@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import Task from './Task.js';
 
-import '../css/styles.css';
+import styles from '../css/styles.css';
 
 // App component - represents the whole app
 export default class App extends Component {
@@ -22,7 +22,7 @@ export default class App extends Component {
 	if (!!navigator.platform) {
       while (iDevices.length) {
         if (navigator.platform === iDevices.pop()){
-			styles.base.paddingTop = '20px'
+			document.body.style.paddingTop = '20px'
 		}
       }
     }
