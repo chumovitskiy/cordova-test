@@ -16,6 +16,7 @@
         "cordova-browser": "^5.0.4",
         "cordova-ios": "^4.5.5",
         "cordova-plugin-device": "^2.0.2",
+        "cordova-plugin-disable-ios11-statusbar": "^1.0.0",
         "cordova-plugin-whitelist": "^1.3.3"
     },
     "devDependencies": {
@@ -36,7 +37,8 @@
     "cordova": {
         "plugins": {
             "cordova-plugin-whitelist": {},
-            "cordova-plugin-device": {}
+            "cordova-plugin-device": {},
+            "cordova-plugin-disable-ios11-statusbar": {}
         },
         "platforms": [
             "android",
