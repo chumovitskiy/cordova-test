@@ -6,27 +6,6 @@ import styles from '../css/styles.css';
 
 // App component - represents the whole app
 export default class App extends Component {
-  
-  constructor(props) {
-    super(props);
-	
-	const iDevices = [
-      'iPad Simulator',
-      'iPhone Simulator',
-      'iPod Simulator',
-      'iPad',
-      'iPhone',
-      'iPod'
-    ];
-	
-	if (!!navigator.platform) {
-      while (iDevices.length) {
-        if (navigator.platform === iDevices.pop()){
-			document.body.style.paddingTop = '20px'
-		}
-      }
-    }
-  }
 	
   getTasks() {
     return [
