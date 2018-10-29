@@ -1,4 +1,5 @@
-plugins/**
-platforms/**
 node_modules/**
+platforms/**
+plugins/**
+www/**
 package-lock.json
