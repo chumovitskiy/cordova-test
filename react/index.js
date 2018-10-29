@@ -3,6 +3,7 @@ import { render} from 'react-dom';
 import MyComponent from './js/MyComponent';
 
 function startApp() {
+  //https://harrymoreno.com/2015/07/14/Deploying-a-React-App-to-Cordova.html
   const App = () => (
     <MyComponent />
 );
