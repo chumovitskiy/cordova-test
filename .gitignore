@@ -1,5 +1,15 @@
+### npm ###
 node_modules/**
+### Cordova ###
 platforms/**
 plugins/**
 www/**
 package-lock.json
+### Gradle ###
+.gradle
+/build/
+### Java ###
+*.class
+*.jar
+# Cache of project
+.gradletasknamecache
