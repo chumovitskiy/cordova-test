@@ -1,10 +1,47 @@
 project(':frontend') {
-    task init(type: Exec) { 
-        commandLine 'cmd', '/c', 'npm', 'install'
-        commandLine 'cmd', '/c', 'cordova', 'platform', 'add', 'browser', 'android', 'ios'
+    task cleanNpm(type: Exec) { 
+        commandLine 'cmd', '/c', 'npm', 'prune'
     }
-    task build(type: Exec) {
-	    commandLine 'cmd', '/c', 'npm', 'run', 'build'
+    task cleanCordova(type: Exec) {
+	    commandLine 'cmd', '/c', 'cordova', 'clean'
+    }
+    task initNpm(type: Exec) { 
+        commandLine 'cmd', '/c', 'npm', 'install'
+    }
+    task initCordova(type: Exec) {
+	    commandLine 'cmd', '/c', 'cordova', 'platform', 'add', 'browser', 'android', 'ios'
+    }
+	task buildNpm(type: Exec) { 
+        commandLine 'cmd', '/c', 'npm', 'run', 'build'
+    }
+    task buildCordovaWeb(type: Exec) {
 		commandLine 'cmd', '/c', 'cordova', 'build', 'browser'
+    }
+	task buildCordovaAndroid(type: Exec) {
+		commandLine 'cmd', '/c', 'cordova', 'build', 'android'
+    }
+	task buildCordovaIos(type: Exec) {
+		commandLine 'cmd', '/c', 'cordova', 'build', 'ios', "--buildFlag='-UseModernBuildSystem=0'"
+    }
+	task buildCordova(type: Exec) {
+		commandLine 'cmd', '/c', 'cordova', 'build'
+    }
+	task init(type: GradleBuild) {
+     tasks = ['initNpm', 'initCordova']
+    }
+	task build(type: GradleBuild) {
+     tasks = ['buildNpm', 'buildCordova']
+    }
+	task buildWeb(type: GradleBuild) {
+     tasks = ['buildNpm', 'buildCordovaWeb']
+    }
+	task buildAndroid(type: GradleBuild) {
+     tasks = ['buildNpm', 'buildCordovaAndroid']
+    }
+	task buildIos(type: GradleBuild) {
+     tasks = ['buildNpm', 'buildCordovaIos']
+    }
+	task clean(type: GradleBuild) {
+     tasks = ['cleanNpm', 'cleanCordova']
     }
 }
