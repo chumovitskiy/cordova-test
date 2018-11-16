@@ -1,15 +1,16 @@
 ### npm ###
-node_modules/**
+frontend/node_modules/**
+frontend/package-lock.json
 ### Cordova ###
-platforms/**
-plugins/**
-www/**
-package-lock.json
+frontend/plugins/**
 ### Gradle ###
 .gradle
 /build/
+!gradle/wrapper/gradle-wrapper.jar
 ### Java ###
 *.class
 *.jar
 # Cache of project
 .gradletasknamecache
+# Other
+*.bak
