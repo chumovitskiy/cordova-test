@@ -8,4 +8,4 @@
  */
 
 rootProject.name = 'hello'
-include 'frontend'
+include 'frontend', 'backend'

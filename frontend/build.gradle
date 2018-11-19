@@ -1,0 +1,40 @@
+project(':frontend') {
+    task cleanNpm(type: Exec) { 
+        commandLine 'cmd', '/c', 'npm', 'prune'
+    }
+	task cleanWWW(type: Delete) {
+        delete fileTree('www') {
+        exclude '.gitignore'
+        }
+        followSymlinks = true
+    }
+    task cleanCordova(type: Exec) {
+	    commandLine 'cmd', '/c', 'cordova', 'clean', "$platform"
+    }
+    task initNpm(type: Exec) { 
+        commandLine 'cmd', '/c', 'npm', 'install'
+    }
+    task initCordova(type: Exec) {
+	    commandLine 'cmd', '/c', 'cordova', 'platform', 'add', 'browser', 'android', 'ios'
+    }
+	task buildNpm(type: Exec) { 
+        commandLine 'cmd', '/c', 'npm', 'run', 'build'
+    }
+	task buildCordova(type: Exec) {
+	    def platform = "$platform"
+		if ('ios' == platform) {
+		    commandLine 'cmd', '/c', 'cordova', 'build', 'ios', "--buildFlag='-UseModernBuildSystem=0'"
+		} else {
+	        commandLine 'cmd', '/c', 'cordova', 'build', platform
+		}
+    }
+	task init(type: GradleBuild) {
+     tasks = ['initNpm', 'initCordova']
+    }
+	task build(type: GradleBuild) {
+     tasks = ['buildNpm', 'buildCordova']
+    }
+	task clean(type: GradleBuild) {
+     tasks = ['cleanNpm', 'cleanWWW', 'cleanCordova']
+    }
+}
