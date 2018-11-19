@@ -38,14 +38,3 @@ project(':frontend') {
      tasks = ['cleanNpm', 'cleanWWW', 'cleanCordova']
     }
 }
-project(':backend') {
-	task init(type: Exec) {
-     commandLine 'cmd', '/c', 'echo', 'init'
-    }
-	task build(type: Exec) {
-     commandLine 'cmd', '/c', 'echo', 'build'
-    }
-	task clean(type: Exec) {
-     commandLine 'cmd', '/c', 'echo', 'clean'
-    }
-}

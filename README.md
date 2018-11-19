@@ -1,11 +1,11 @@
 # My Test Cordova build for web, android and ios
-## Set platform in gradle.properties
+## Set platform in frontend/gradle.properties
 browser, android or ios
 ## Init
 gradlew init
 ## Build
 gradlew build
-## run ios
+## Run frontend
 cd frontend
 cordova run --emulator --nobuild ios
 cordova run --emulator --nobuild android
