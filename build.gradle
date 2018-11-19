@@ -2,8 +2,14 @@ project(':frontend') {
     task cleanNpm(type: Exec) { 
         commandLine 'cmd', '/c', 'npm', 'prune'
     }
+	task cleanWWW(type: Delete) {
+        delete fileTree('www') {
+        exclude '.gitignore'
+        }
+        followSymlinks = true
+    }
     task cleanCordova(type: Exec) {
-	    commandLine 'cmd', '/c', 'cordova', 'clean'
+	    commandLine 'cmd', '/c', 'cordova', 'clean', "$platform"
     }
     task initNpm(type: Exec) { 
         commandLine 'cmd', '/c', 'npm', 'install'
@@ -14,17 +20,13 @@ project(':frontend') {
 	task buildNpm(type: Exec) { 
         commandLine 'cmd', '/c', 'npm', 'run', 'build'
     }
-    task buildCordovaWeb(type: Exec) {
-		commandLine 'cmd', '/c', 'cordova', 'build', 'browser'
-    }
-	task buildCordovaAndroid(type: Exec) {
-		commandLine 'cmd', '/c', 'cordova', 'build', 'android'
-    }
-	task buildCordovaIos(type: Exec) {
-		commandLine 'cmd', '/c', 'cordova', 'build', 'ios', "--buildFlag='-UseModernBuildSystem=0'"
-    }
 	task buildCordova(type: Exec) {
-		commandLine 'cmd', '/c', 'cordova', 'build'
+	    def platform = "$platform"
+		if ('ios' == platform) {
+		    commandLine 'cmd', '/c', 'cordova', 'build', 'ios', "--buildFlag='-UseModernBuildSystem=0'"
+		} else {
+	        commandLine 'cmd', '/c', 'cordova', 'build', platform
+		}
     }
 	task init(type: GradleBuild) {
      tasks = ['initNpm', 'initCordova']
@@ -32,16 +34,18 @@ project(':frontend') {
 	task build(type: GradleBuild) {
      tasks = ['buildNpm', 'buildCordova']
     }
-	task buildWeb(type: GradleBuild) {
-     tasks = ['buildNpm', 'buildCordovaWeb']
-    }
-	task buildAndroid(type: GradleBuild) {
-     tasks = ['buildNpm', 'buildCordovaAndroid']
-    }
-	task buildIos(type: GradleBuild) {
-     tasks = ['buildNpm', 'buildCordovaIos']
-    }
 	task clean(type: GradleBuild) {
-     tasks = ['cleanNpm', 'cleanCordova']
+     tasks = ['cleanNpm', 'cleanWWW', 'cleanCordova']
+    }
+}
+project(':backend') {
+	task init(type: Exec) {
+     commandLine 'cmd', '/c', 'echo', 'init'
+    }
+	task build(type: Exec) {
+     commandLine 'cmd', '/c', 'echo', 'build'
+    }
+	task clean(type: Exec) {
+     commandLine 'cmd', '/c', 'echo', 'clean'
     }
 }
