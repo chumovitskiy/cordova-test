@@ -12,5 +12,8 @@ frontend/plugins/**
 *.jar
 # Cache of project
 .gradletasknamecache
+# IDEA
+.idea
+*.iml
 # Other
 *.bak

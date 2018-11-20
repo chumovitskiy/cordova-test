@@ -8,11 +8,13 @@ import styles from '../css/styles.css';
 export default class App extends Component {
 	
   getTasks() {
-    return [
-      { _id: 1, text: 'This is task 1' },
-      { _id: 2, text: 'This is task 2' },
-      { _id: 3, text: 'This is task 3' },
-    ];
+    const URL = "http://localhost:8083/tasks";
+    fetch(URL, {mode: "cors"})
+      .then(data => data.json())
+      .then(tasks => console.log(`tasks: ${tasks}`))
+	  .catch(error => console.log(`parsing failed: ${error}`))
+
+    return []
   }
  
   renderTasks() {
