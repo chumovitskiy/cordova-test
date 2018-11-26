@@ -5,7 +5,7 @@ plugins {
 group 'com.beuty4me'
 version '1.0'
 
-sourceCompatibility = 1.8
+sourceCompatibility = 11
 
 repositories {
     mavenCentral()
@@ -14,8 +14,34 @@ repositories {
 apply plugin: 'java'
 
 
-
 dependencies {
     compile 'org.springframework.boot:spring-boot-starter-webflux:2.0.3.RELEASE'
     testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+//project.afterEvaluate {
+//    project.task("cleanUI") {
+//        mustRunAfter "clean"
+//        println "start cleanUI"
+//        delete fileTree('src/main/resources/ui')
+//    }
+//}
+
+project.task("copyUI") {
+    mustRunAfter "build"
+    println "start copyUI"
+    copy {
+        from project(':frontend').files('platforms/browser/www/index.html', 'platforms/browser/www/cordova.js',
+                'platforms/browser/www/bundle.js', 'platforms/browser/www/cordova_plugins.js',
+                'platforms/browser/www/favicon.ico')
+        into project.file('src/main/resources/ui')
+    }
+    copy {
+        from project(':frontend').file('platforms/browser/www/plugins/cordova-plugin-device/www/device.js')
+        into project.file('src/main/resources/ui/plugins/cordova-plugin-device/www')
+    }
+    copy {
+        from project(':frontend').file('platforms/browser/www/plugins/cordova-plugin-device/src/browser/DeviceProxy.js')
+        into project.file('src/main/resources/ui/plugins/cordova-plugin-device/src/browser')
+    }
 }

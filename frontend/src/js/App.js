@@ -6,19 +6,33 @@ import styles from '../css/styles.css';
 
 // App component - represents the whole app
 export default class App extends Component {
-	
-  getTasks() {
-    const URL = "http://localhost:8083/tasks";
-    fetch(URL, {mode: "cors"})
-      .then(data => data.json())
-      .then(tasks => console.log(`tasks: ${tasks}`))
-	  .catch(error => console.log(`parsing failed: ${error}`))
 
-    return []
+  constructor(props){
+    super(props);
+    this.state = this.initState()
+  }
+
+  initState() {
+    return {
+      tasks: []
+    }
+  }
+
+  componentDidMount() {
+    const URL = "http://localhost:8080/tasks"
+
+    fetch(URL)
+      .then(response => response.json())
+      .then(data => {
+        console.log(`data.tasks: ${data}`)
+        this.setState({ tasks: data })
+      })
+      .catch(error => console.log(`parsing failed: ${error}`))
   }
  
   renderTasks() {
-    return this.getTasks().map((task) => (
+    const { tasks } = this.state
+    return tasks.map((task) => (
       <Task key={task._id} task={task} />
     ));
   }
@@ -36,4 +50,5 @@ export default class App extends Component {
       </div>
     );
   }
+
 }
